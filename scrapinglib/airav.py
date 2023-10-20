@@ -36,6 +36,7 @@ class Airav(Parser):
                 self.javbus = {"title": ""}
             else:
                 self.javbus = json.loads(javbusinfo)
+
         self.htmlcode = self.getHtml(self.detailurl)
         # htmltree = etree.fromstring(self.htmlcode, etree.HTMLParser())
         #result = self.dictformat(htmltree)

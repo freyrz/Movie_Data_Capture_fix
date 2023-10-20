@@ -115,7 +115,7 @@ class Scraping:
 
     def searchAdult(self, number, sources):
 
-        # //print('[+]select', sources)
+        print('[+]select', sources)
         # self.debug = True
         if self.specifiedSource:
             sources = [self.specifiedSource]
@@ -133,7 +133,7 @@ class Scraping:
                     module = importlib.import_module('.' + source, 'scrapinglib')
                     parser_type = getattr(module, source.capitalize())
                     parser: Parser = parser_type()
-                    data = parser.scrape(self, number)
+                    data = parser.scrape(number,self)
                     if data == 404:
                         continue
                     if len(json_data) > 2:
