@@ -7,6 +7,8 @@ import sys
 import time
 import shutil
 import typing
+from typing import Any
+
 import urllib3
 import signal
 import platform
@@ -35,7 +37,7 @@ def check_update(local_version):
         print("[*]======================================================")
 
 
-def argparse_function(ver: str) -> typing.Tuple[str, str, str, str, bool, bool, str, str]:
+def argparse_function(ver: str) -> tuple[Any, Any, Any, Any, Any, bool | Any, Any, Any, Any]:
     conf = config.getInstance()
     parser = argparse.ArgumentParser(epilog=f"Load Config file '{conf.ini_path}'.")
     parser.add_argument("file", default='', nargs='?', help="Single Movie file path.")
@@ -159,6 +161,7 @@ class OutLogger(object):
 class ErrLogger(OutLogger):
 
     def __init__(self, logfile) -> None:
+        super().__init__(logfile)
         self.term = sys.stderr
         self.log = open(logfile, "w", encoding='utf-8', buffering=1)
         self.filepath = logfile
@@ -559,7 +562,7 @@ def main(args: tuple) -> Path:
 
     if conf.update_check():
         try:
-            check_update(version)
+            # check_update(version)
             # Download Mapping Table, parallel version
             def fmd(f) -> typing.Tuple[str, Path]:
                 return ('https://raw.githubusercontent.com/yoshiko2/Movie_Data_Capture/master/MappingTable/' + f,
